@@ -4,14 +4,24 @@ import {BsArrowsFullscreen,BsPeople  } from "react-icons/bs";
 
 
 const Room = ({room}) => {
-  const { id, name, image, size, maxPerson, description, price} = room;
+  const { id, name, images, size, maxPerson, description, price} = room;
+
+  const extractText = (node) => {
+    if (node.text) {
+      return node.text;
+    }
+    if (node.children) {
+      return node.children.map(extractText).join(' ');
+    }
+    return '';
+  };
   
   return( 
     <div className='bg-white shadow-2xl min-h-[500px] group'>
       {/*img*/}
       <div className='overflow-hidden'>
         <img className='group-hover:scale-110 transition-all duration-300 w-full '  
-        src={image} alt="" />
+        src={`http://localhost:3000/${images[0].image.url}`} alt="" />
       </div>
       {/*details*/}
       <div className='bg-white shadow-lg max-w-[300px] mx-auto h-[60px] -translate-y-1/2
@@ -43,7 +53,7 @@ const Room = ({room}) => {
         <Link to={`/room/${id}`}>
           <h3 className='h3'>{name}</h3>
         </Link>
-        <p className='max-w-[300px] mx-auto mb-3 lg:mb-6'>{description.slice(0,56)}</p>
+        <p className='max-w-[300px] mx-auto mb-3 lg:mb-6'>{extractText(description.root).slice(0,56)}</p>
       </div>
       {/*button*/}
       <Link to={`/room/${id}`} className='btn btn-secondary btn-sm max-w-[240px] mx-auto text-center'>

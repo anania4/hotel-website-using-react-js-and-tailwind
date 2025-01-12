@@ -6,7 +6,15 @@ import RoomDetails from "./pages/RoomDetails";
 //import { roomData } from "./data";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useContext, useState } from "react";
-import { RoomContext } from "./context/RoomContext";
+import RoomProvider, { RoomContext } from "./context/RoomContext";
+
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -18,14 +26,17 @@ const router = createBrowserRouter([
     element: <RoomDetails />,
   },
 ]);
-
 const App = () => {
   return (
-    <div>
-      <Header />
-      <RouterProvider router={router} />
-      <Footer />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <Header />
+        <RoomProvider>
+          <RouterProvider router={router} />
+        </RoomProvider>
+        <Footer />
+      </div>
+    </QueryClientProvider>
   );
 };
 

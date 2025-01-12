@@ -2,9 +2,13 @@ import React, { useContext } from 'react';
 import Rooms, {  } from "../components/Rooms";
 import BookForm from '../components/BookForm';
 import HeroSlider from '../components/HeroSlider';
+import { RoomContext } from '../context/RoomContext';
 
 
 const Home = ({}) => {
+  
+  const rooms = useContext(RoomContext)
+  console.log(rooms);
 
   return (
   <>
