@@ -1,20 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import {BsArrowsFullscreen,BsPeople  } from "react-icons/bs";
+import { extractText } from '../utils';
 
 
 const Room = ({room}) => {
   const { id, name, images, size, maxPerson, description, price} = room;
 
-  const extractText = (node) => {
-    if (node.text) {
-      return node.text;
-    }
-    if (node.children) {
-      return node.children.map(extractText).join(' ');
-    }
-    return '';
-  };
+  
   
   return( 
     <div className='bg-white shadow-2xl min-h-[500px] group'>
