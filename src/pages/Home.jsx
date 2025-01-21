@@ -3,6 +3,12 @@ import Rooms, {  } from "../components/Rooms";
 import BookForm from '../components/BookForm';
 import HeroSlider from '../components/HeroSlider';
 import { RoomContext } from '../context/RoomContext';
+import Services from '../components/Services';
+import CustomerReviews from '../components/CustomerReviews';
+import RoomGallery from '../components/Gallery';
+
+import imag from "../assets/img/room.jpg";
+import SpecialEvents from '../components/SpecialEvents';
 
 
 const Home = ({}) => {
@@ -20,6 +26,10 @@ const Home = ({}) => {
       </div>
     </div> 
     <Rooms/>
+    <Services/>
+    <SpecialEvents/>
+    <RoomGallery images={[imag,imag,imag]}/>
+    <CustomerReviews/>
   </>
   );
 };

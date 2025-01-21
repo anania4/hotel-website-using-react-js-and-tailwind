@@ -13,6 +13,8 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import Events from "./pages/Events";
+
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
     path: "/room/:id",
     element: <RoomDetails />,
   },
+  {
+    path:"/Events",
+    element:<Events/>,
+  }
 ]);
 const App = () => {
   return (
