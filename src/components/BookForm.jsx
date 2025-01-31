@@ -27,7 +27,7 @@ const BookForm = () => {
           <DatePicker
             className="w-full h-full"
             selected={startDate}
-            placeholderText="Check in"
+            placeholderText="Check out"
             onChange={(data) => setstartDate(date)}
           />
         </div>
