@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import Rooms, {  } from "../components/Rooms";
 import BookForm from '../components/BookForm';
@@ -9,6 +10,7 @@ import RoomGallery from '../components/Gallery';
 
 import imag from "../assets/img/room.jpg";
 import SpecialEvents from '../components/SpecialEvents';
+import CounterPage from '../components/CounterPage';
 
 
 const Home = ({}) => {
@@ -29,6 +31,7 @@ const Home = ({}) => {
     <Services/>
     <SpecialEvents/>
     <RoomGallery images={[imag,imag,imag]}/>
+    <CounterPage/>
     <CustomerReviews/>
   </>
   );
