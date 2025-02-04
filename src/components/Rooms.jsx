@@ -14,12 +14,10 @@ const Rooms = () => {
     queryFn: () => fetch("/api/api/room").then((res) => res.json()),
   });
 
-  if (isPending)
-    return <Loading />;
+  if (isPending) return <Loading />;
 
   if (error) return <Error />;
 
-  
   return (
     <section className="py-24">
       <div className="container mx-auto ">

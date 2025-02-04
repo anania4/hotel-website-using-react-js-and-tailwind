@@ -4,3 +4,4 @@ export const hotelRules = [
     'No Pets',
       'No Smoking',
   ];
+

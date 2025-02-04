@@ -32,7 +32,7 @@ const Header = ({}) => {
           <Link to="/" className="hover:text-accent transition">
             Home
           </Link>
-          <Link to="" className="hover:text-accent transition">
+          <Link to="/" className="hover:text-accent transition">
             Rooms
           </Link>
           <Link to="/MyBookings" className="hover:text-accent transition">

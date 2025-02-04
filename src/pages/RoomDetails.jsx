@@ -11,12 +11,13 @@ import ScrollTop from "../components/ScrollToTop";
 import RoomContext from "../context/RoomContext";
 
 import { FaCheck } from "react-icons/fa";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { extractText } from "../utils";
 import { BsImage } from "react-icons/bs";
-import { facilities, getFacilityIcon } from "../data";
+import { getFacilityIcon } from "../data";
 import DatePicker from "react-datepicker";
 import { hotelRules } from "../constant";
+import { queryClient } from "../App";
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -32,12 +33,25 @@ const RoomDetails = () => {
     queryFn: () => fetch(`/api/api/room/${id}`).then((res) => res.json()),
   });
 
+
+   // Mutations
+   const mutation = useMutation({
+    mutationFn: () => (roomData) => fetch(`/api/api/booking`), 
+    onSuccess: () => {
+      // Invalidate and refetch
+     // queryClient.invalidateQueries({ queryKey: ['todos'] })
+    },
+  })
   
+
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  const { title, description, price, size, maxPerson, images,  } =
+  const { title, description, price, size, maxPerson, images, facilities } =
     room;
+
+  console.log("room");
+  console.log(room);
 
   return (
     <section className="">
@@ -54,32 +68,29 @@ const RoomDetails = () => {
             <div className="bg-white max-w-2xl mx-auto py-8 px-6">
               {/* Price */}
               <h4 className="text-gray-700 text-xs font-bold uppercase mb-2">
-                FORM $55.00
+                FORM ${price}
               </h4>
               {/* Title */}
               <h2 className="text-3xl font-semibold text-gray-800 mb-6">
-                Luxury Room
+                {title}
               </h2>
 
               {/* Description */}
               <p className="text-gray-700 leading-relaxed mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisl
-                turpis cum tempor vitae. Curabitur at amet, enim sit commodo
-                semper lectus phasellus. et eleifend ut. Porta proin malesuada
-                volutpat purus.
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-6">
-                At quam ac ipsum volutpat non. Duis sagittis, sollicitudin eget
-                tristique consectetur et facilisi.
+                {extractText(description?.root)}
               </p>
 
               {/* Image */}
               <div className="rounded-md overflow-hidden h-[400px] w-[400px]">
-                <img
-                  src="https://i.ibb.co/Z89wQnC/luxury-room.png" // Replace with the correct path
-                  alt="Luxury Room"
-                  className="w-full"
-                />
+                {images.map((image, index) => (
+                  <>
+                    <img
+                      src={`http://localhost:3000/${image?.image?.url}`}
+                      alt={image?.image?.alt}
+                      className="w-full"
+                    />
+                  </>
+                ))}
               </div>
             </div>
             <div className="bg-white py-8 px-6">
@@ -88,20 +99,17 @@ const RoomDetails = () => {
                 Amenities
               </h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Adipiscing integer ultrices suspendisse varius etiam est. Est,
-                felis, tempus nec vitae orci sodales Metus, velit nec at diam in
-                sed. Massa dui ipsum ornare sagittis dolor sagittis amet odio
-                est. Sit semper et velit fusce.
+              Enjoy a variety of amenities during your stay. Our facilities are designed to provide comfort and convenience for all our guests.
+            
               </p>
               <div className="grid grid-cols-3 gap-6 mb-8">
                 {facilities.map((amenity, index) => (
                   <div key={index} className="flex flex-col items-center">
-                    <i
-                      className={`text-2xl text-brown-500 mb-2`}
-                    >{amenity.icon} </i>
+                    <i className={`text-2xl text-brown-500 mb-2`}>
+                      {getFacilityIcon(amenity?.name).icon}{" "}
+                    </i>
                     <span className="text-gray-700 text-sm">
-                      {amenity.name}
+                      {amenity?.name}
                     </span>
                   </div>
                 ))}
@@ -110,15 +118,9 @@ const RoomDetails = () => {
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                 Hotel Rules
               </h2>
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Adipiscing integer ultrices suspendisse varius etiam est. Est,
-                felis, tempus nec vitae orci sodales Metus, velit nec at diam in
-                sed. Massa dui ipsum ornare sagittis dolor sagittis amet odio
-                est. Sit semper et velit fusce.
-              </p>
+              <p className="text-gray-700 mb-6 leading-relaxed">{}</p>
               <ul className="text-gray-700">
-                {hotelRules.map((rule, index) => (
+                {hotelRules?.map((rule, index) => (
                   <li key={index} className="flex items-center mb-2">
                     <i className="fas fa-check text-brown-500 mr-2"></i>
                     {rule}

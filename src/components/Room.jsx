@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { extractText } from "../utils";
 
-const Room = ({}) => {
-  // eslint-disable-next-line react/prop-types
+const Room = ({ room }) => {
+  
   const { id, name, images, size, maxPerson, description, price } = room;
 
   return (
@@ -15,7 +17,7 @@ const Room = ({}) => {
       <div className="overflow-hidden">
         <img
           className="group-hover:scale-110 transition-all duration-300 w-full "
-          src={`http://localhost:3000/${images[0].image.url}`}
+          src={`http://localhost:3000/${images[0]?.image?.url}`}
           alt=""
         />
       </div>
@@ -63,3 +65,4 @@ const Room = ({}) => {
 };
 
 export default Room;
+//export default Room;

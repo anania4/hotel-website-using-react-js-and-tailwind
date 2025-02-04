@@ -1,4 +1,3 @@
-import React from 'react';
 
 const SpecialEvents = () => {
   return (
@@ -8,7 +7,7 @@ const SpecialEvents = () => {
         <span className="italic">Selam</span>,
       </h1>
         <p className="text-lg text-black mb-8">
-        Looking for more than just a place to sleep? Home is where unique experiences unfold. We're proud to offer a calendar packed with special events, adding a touch of magic to every stay. Explore what we have in store for you!
+        Looking for more than just a place to sleep? Home is where unique experiences unfold. We&apos;re proud to offer a calendar packed with special events, adding a touch of magic to every stay. Explore what we have in store for you!
         </p>
         <button className="bg-gray-200 text-black px-6 py-3 rounded-md hover:bg-gray-300 transition-colors">
           Events

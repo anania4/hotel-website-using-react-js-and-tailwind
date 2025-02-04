@@ -25,8 +25,9 @@ import Events from "./pages/Events";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import MyBookings from "./pages/MyBookings";
+import Rooms from "./components/Rooms";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 /*
 const router = createBrowserRouter([
   {
@@ -74,6 +75,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/room/:id" element={<RoomDetails />} />
+              <Route path="/rooms" element={<Rooms />} />
               <Route path="/Events" element={<Events />} />
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/ContactUs" element={<ContactUs />} />
