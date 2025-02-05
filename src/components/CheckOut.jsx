@@ -21,7 +21,7 @@ const CheckOut = () => {
         className="w-full h-full"
         selected={endDate}
         placeholderText="Check in"
-        onChange={(data) => setEndDate(date)}
+        onChange={(date) => setEndDate(date)}
       />
     </div>
   );

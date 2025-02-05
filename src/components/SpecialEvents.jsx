@@ -1,7 +1,7 @@
 
 const SpecialEvents = () => {
   return (
-    <div className="bg-[#faf5f2] flex flex-col items-center justify-center py-20  min-h-[400px]">
+    <div className="bg-white flex flex-col items-center justify-center py-20  min-h-[400px]">
       <div className="text-center max-w-2xl">
       <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 font-serif">
         <span className="italic">Selam</span>,

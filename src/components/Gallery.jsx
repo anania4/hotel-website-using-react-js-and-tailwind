@@ -10,9 +10,9 @@ import { A11y, Navigation, Pagination } from 'swiper/modules';
 
 const RoomGallery = ({ images }) => {
   return (
-    <div className="relative bg-gray-900 ">
+    <div className="relative bg-white ">
       <div className="flex justify-center py-4">
-        <h2 className="text-3xl font-bold text-white">Gallery</h2>
+        <h2 className="text-3xl font-bold text-gray-950">Gallery</h2>
       </div>
       <div className="relative">
         <Swiper

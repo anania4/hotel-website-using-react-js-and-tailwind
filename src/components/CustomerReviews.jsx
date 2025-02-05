@@ -34,7 +34,7 @@ const CustomerReviews = () => {
 
   return (
     <div className="bg-black text-white py-12">
-      <h1 className="text-4xl font-bold text-center mb-8">Reviews</h1>
+      <h1 className="text-4xl font-bold text-center mb-8">What they say about us</h1>
       <div className="relative max-w-2xl mx-auto text-center">
         <p className="text-lg italic mb-4">{`"${reviews[currentIndex].text}"`}</p>
         <p className="font-semibold">{reviews[currentIndex].author}</p>

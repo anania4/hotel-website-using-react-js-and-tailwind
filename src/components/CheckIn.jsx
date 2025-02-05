@@ -9,9 +9,9 @@ import "../datepicker.css"
 import { BsCalendar } from "react-icons/bs";
 
 const CheckIn = () => {
-  const [endDate, setEndDate] = useState(false)
+  const [startDate, setStartDate] = useState(null)
   return (
-  <div className='relative flex items-center justify-center h-full '>
+  <div className='relative flex items-center justify-end h-full '>
     {/*icons*/}
     <div className='absolute z-10 pr-8'>
       <div>
@@ -20,9 +20,9 @@ const CheckIn = () => {
     </div>
     <DatePicker
       className='w-full h-full'
-      selected={endDate}
+      selected={startDate}
       placeholderText='Check in'
-      onChange={(data)=>setEndDate(date)}
+      onChange={(date)=>setStartDate(date)}
     />
   </div>
   ); 
