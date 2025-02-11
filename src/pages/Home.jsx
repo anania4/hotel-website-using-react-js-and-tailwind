@@ -27,7 +27,6 @@ const Home = ({}) => {
           <BookForm />
         </div>
       </div>
-      <Rooms />
       <Services />
       <SpecialEvents />
       <RoomGallery images={[imag, imag, imag]} />

@@ -26,6 +26,11 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import MyBookings from "./pages/MyBookings";
 import Rooms from "./components/Rooms";
+import RoomSearch from "./pages/RoomSearch";
+import PaymentDetails from "./pages/BookingDetails";
+import BookingDetails from "./pages/BookingDetails";
+import BookingProvider from "./context/BookingContext";
+import PaymentSummary from "./pages/PaymentSummary";
 
 export const queryClient = new QueryClient();
 /*
@@ -68,23 +73,28 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <>
-          <div>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/room/:id" element={<RoomDetails />} />
-              <Route path="/rooms" element={<Rooms />} />
-              <Route path="/Events" element={<Events />} />
-              <Route path="/AboutUs" element={<AboutUs />} />
-              <Route path="/ContactUs" element={<ContactUs />} />
-              <Route path="/MyBookings" element={<MyBookings />} />
-            </Routes>
-            <Footer />
-          </div>
-        </>
-      </BrowserRouter>
+      <BookingProvider>
+        <BrowserRouter>
+          <>
+            <div>
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/room/:id" element={<RoomDetails />} />
+                <Route path="/roomsy" element={<RoomSearch />} />
+                <Route path="/rooms" element={<Rooms />} />
+                <Route path="/Events" element={<Events />} />
+                <Route path="/AboutUs" element={<AboutUs />} />
+                <Route path="/ContactUs" element={<ContactUs />} />
+                <Route path="/MyBookings" element={<MyBookings />} />
+                <Route path="/BookingDetails" element={<BookingDetails />} />
+                <Route path="/PaymentSummary" element={<PaymentSummary />} />
+              </Routes>
+              <Footer />
+            </div>
+          </>
+        </BrowserRouter>
+      </BookingProvider>
     </QueryClientProvider>
   );
 };

@@ -15,16 +15,16 @@ const ContactUs = () => {
         {/* Contact Info */}
         <div className="flex justify-center space-x-12 text-gray-700 text-lg mb-8">
           <div className="flex items-center space-x-2">
-            <FaMapMarkerAlt className="text-red-500" />
+            <FaMapMarkerAlt className="text-primary" />
             <span>Debre Tabor, Ethiopia</span>
           </div>
           <div className="flex items-center space-x-2">
-            <FaPhoneAlt className="text-red-500" />
+            <FaPhoneAlt className="text-primary" />
             <span>(+251) 92444 1555 </span>
           </div>
           <div className="flex items-center space-x-2">
-            <FaEnvelope className="text-red-500" />
-            <span>ananiaminda@gmail.com</span>
+            <FaEnvelope className="text-primary" />
+            <span>HOME@dtu.com</span>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ const ContactUs = () => {
                 placeholder="Message"
                 className="w-full p-3 border rounded-md h-24"
               ></textarea>
-              <button className="w-full bg-red-500 text-white py-3 rounded-md hover:bg-red-600">
+              <button className="w-full btn btn-primary text-white py-3 rounded-md ">
                 SUBMIT NOW
               </button>
             </form>

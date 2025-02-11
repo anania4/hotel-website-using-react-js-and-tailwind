@@ -6,12 +6,13 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "./ui/Loading";
 import Error from "./ui/Error";
 
-const Rooms = () => {
+const Rooms = ({ query }) => {
   //const { rooms } = useContext(RoomContext);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["rooms"],
-    queryFn: () => fetch("/api/api/room").then((res) => res.json()),
+    queryFn: () =>
+      fetch(`/api/api/room${"?" + { query }}`).then((res) => res.json()),
   });
 
   if (isPending) return <Loading />;

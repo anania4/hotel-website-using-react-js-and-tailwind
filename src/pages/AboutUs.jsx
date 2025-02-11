@@ -1,4 +1,5 @@
 import React from "react";
+import  ANU  from "../assets/img/ANU.jpg";
 
 
 const Card = ({ image, title, text }) => (
@@ -28,6 +29,29 @@ const AboutUs = () => {
     }
   ];
 
+  const teams =[
+    {image:"ANU",
+      title:"ANANIA MINDA TADESSE",
+      text:"CEO"
+    },
+    {image:"",
+      title:"ABIGIYA DESTA",
+      text:"ጽዳት"
+    },
+    {image:"",
+      title:"ADDISU ABEBE",
+      text:"ጥበቃ"
+    },
+    {image:"",
+      title:"HAMDU SHUME",
+      text:"ሌላ ጥበቃ"
+    },
+    {image:"",
+      title:"SURAFEL ABRAHAM",
+      text:"የጥበቃ ሃላፊ"
+    },
+  ]
+
   return (
     <div>
       <div className="bg-room bg-cover bg-center h-[560px] relative flex justify-center items-center">
@@ -52,7 +76,7 @@ const AboutUs = () => {
             you&apos;re not just a guest—you’re family. Book your stay today and
             experience the ultimate blend of luxury and coziness!
           </p>
-          <button className="mt-6 bg-rose-500 hover:bg-rose-600 text-white px-6 py-2 rounded-lg">
+          <button className="mt-6 btn btn-primary text-white px-6 py-2 rounded-lg">
             Discover More
           </button>
         </div>
@@ -66,6 +90,13 @@ const AboutUs = () => {
         <Card key={index} {...card} />
       ))}
     </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-100 min-h-screen">
+      {teams.map((card, index) => (
+        <Card key={index} {...card} />
+      ))}
+    </div>
+
     </div>
     
   );
