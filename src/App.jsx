@@ -30,7 +30,9 @@ import RoomSearch from "./pages/RoomSearch";
 import PaymentDetails from "./pages/BookingDetails";
 import BookingDetails from "./pages/BookingDetails";
 import BookingProvider from "./context/BookingContext";
-import PaymentSummary from "./pages/PaymentSummary";
+import BookingSummary from "./pages/BookingSummary";
+
+import { Toaster } from "sonner";
 
 export const queryClient = new QueryClient();
 /*
@@ -77,6 +79,7 @@ const App = () => {
         <BrowserRouter>
           <>
             <div>
+              <Toaster richColors/>
               <Header />
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -88,7 +91,7 @@ const App = () => {
                 <Route path="/ContactUs" element={<ContactUs />} />
                 <Route path="/MyBookings" element={<MyBookings />} />
                 <Route path="/BookingDetails" element={<BookingDetails />} />
-                <Route path="/PaymentSummary" element={<PaymentSummary />} />
+                <Route path="/BookingSummary/:bookingId" element={<BookingSummary />} />
               </Routes>
               <Footer />
             </div>

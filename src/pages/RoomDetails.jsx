@@ -16,6 +16,7 @@ import DatePicker from "react-datepicker";
 import { hotelRules } from "../constant";
 import { queryClient } from "../App";
 import { BookingContext } from "../context/BookingContext";
+import { toast } from "sonner";
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -34,6 +35,8 @@ const RoomDetails = () => {
     setCheckOut,
 
     setSelectedRoom,
+
+    setBookedRoomInfo,
   } = useContext(BookingContext);
 
   const navigate = useNavigate();
@@ -48,11 +51,15 @@ const RoomDetails = () => {
   });
 
   const handleSubmit = (e) => {
+    setBookedRoomInfo({});
     if (!checkIn || !checkOut || !adults || !kids) {
-      alert("Please select check-in and check-out dates");
+      toast.error("Please select check-in and check-out dates");
+
       return;
     }
-
+    setBookedRoomInfo({
+      ...room
+    });
     setSelectedRoom(id);
 
     navigate("/BookingDetails");

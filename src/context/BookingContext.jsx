@@ -24,6 +24,8 @@ const BookingProvider = ({ children }) => {
 
   const [selectedRoom, setSelectedRoom] = useState(null);
 
+  const [bookedRoomInfo, setBookedRoomInfo] = useState(null);
+
   const titles = ["Mr.", "Ms."];
   const countries = [
     "Ethiopia",
@@ -44,7 +46,7 @@ const BookingProvider = ({ children }) => {
         setAdults,
         kids,
         setKids,
-      
+
         checkIn,
         setCheckIn,
         checkOut,
@@ -74,6 +76,9 @@ const BookingProvider = ({ children }) => {
 
         selectedRoom,
         setSelectedRoom,
+
+        bookedRoomInfo,
+        setBookedRoomInfo,
       }}
     >
       {children}
