@@ -9,7 +9,7 @@ import { extractText } from "../utils";
 
 const Room = ({ room }) => {
   
-  const { id, name, images, size, maxPerson, description, price } = room;
+  const { id, name, images, size, maxPerson, description, price, title } = room;
 
   return (
     <div className="bg-white shadow-2xl min-h-[500px] group">
@@ -34,14 +34,14 @@ const Room = ({ room }) => {
             </div>
             <div>
               <div className="flex gap-x-1">
-                <div>Max people</div>
-                <div>{maxPerson}</div>
+                <div>{title}</div>
+                
               </div>
             </div>
           </div>
 
           {/*people*/}
-          <div>people</div>
+          <div>{maxPerson} people</div>
         </div>
       </div>
       {/*name*/}

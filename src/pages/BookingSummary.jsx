@@ -1,26 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { BookingContext } from "../context/BookingContext";
 
 export default function BookingSummary() {
   const [isOpen, setIsOpen] = useState(false);
+  const [taxes, setTaxes] = useState(0);
 
   const { bookingId } = useParams();
 
-  const { bookedRoomInfo } = useContext(BookingContext);
+  const navigate = useNavigate();
 
-  /*
-  // Queries
-  const bookingInfo = useQuery({
-    queryKey: ["booking"],
-    queryFn: () => fetch(`/api/bookings?id=${bookingId}&depth=2`),
+  const { bookedRoomInfo, rooms, checkIn, checkOut } =
+    useContext(BookingContext);
+
+  const TAX_RATE = 0.1; // 10% tax rate
+
+  useEffect(() => {
+    if (bookedRoomInfo?.price) {
+      setTaxes(bookedRoomInfo.price * rooms * TAX_RATE);
+    }
+  }, [bookedRoomInfo]);
+
+  const paymentMutation = useMutation({
+    mutationFn: (bookingId) =>
+      fetch(`/api/api/payments/${bookingId}/payment-initiate`, {})
+        .then((response) => response.json())
+        .catch((error) => error),
+
+    onSuccess: (data) => {},
   });
-  */
+
+  const handlePayment = () => {
+    paymentMutation.mutate(bookingId);
+
+    if (paymentMutation.isSuccess) {
+      navigate(paymentMutation.data?.check_);
+      
+    }
+  };
 
   return (
     <div className="w-full bg-room bg-cover bg-center py-20">
@@ -31,53 +53,62 @@ export default function BookingSummary() {
         </div>
         <div className="mt-4">
           <h2 className="text-lg font-semibold">Your Reservation Details</h2>
-          <p className="text-sm text-gray-500">Booking Reference: {bookingId}</p>
+          <p className="text-sm text-gray-500">
+            Booking Reference: {bookingId}
+          </p>
         </div>
         <div className="mt-4 border-t pt-4">
-          <h3 className="font-semibold"></h3>
-          <p className="text-gray-500 text-sm">Bebre</p>
+          <h3 className="font-semibold">{bookedRoomInfo?.title}</h3>
+          <p className="text-gray-500 text-sm">
+            {bookedRoomInfo?.description?.root?.children[0]?.children[0]?.text}
+          </p>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
           <div>
             <p className="font-medium">Check-in</p>
-            <p className="text-gray-500">10 Feb 2025</p>
+            <p className="text-gray-500">{checkIn}</p>
           </div>
           <div>
             <p className="font-medium">Check-out</p>
-            <p className="text-gray-500">17 Feb 2025</p>
+            <p className="text-gray-500">{checkOut}</p>
           </div>
           <div>
             <p className="font-medium">Guests</p>
-            <p className="text-gray-500">2 Adults</p>
+            <p className="text-gray-500">{bookedRoomInfo?.maxPerson}</p>
           </div>
           <div>
             <p className="font-medium">Room Type</p>
-            <p className="text-gray-500">Deluxe Ocean View</p>
+            <p className="text-gray-500">{bookedRoomInfo?.title}</p>
           </div>
         </div>
         <div className="mt-4 border-t pt-4 text-sm">
           <h3 className="font-semibold">Amenities</h3>
           <p className="text-gray-500">
-            Free Wi-Fi, Breakfast Included, Gym Access
+            {bookedRoomInfo?.facilities?.map((v) => v.name).join(", ")}
           </p>
         </div>
         <div className="mt-4 border-t pt-4 text-sm">
           <h3 className="font-semibold">Price Breakdown</h3>
           <div className="flex justify-between">
             <span>Room rate (7 nights)</span>
-            <span>$1200</span>
+            <span>${bookedRoomInfo?.price}</span>
           </div>
           <div className="flex justify-between">
             <span>Taxes</span>
-            <span>$150</span>
+            <span>${taxes.toFixed(2)}</span>
           </div>
           <div className="flex justify-between">
             <span>Fees</span>
-            <span>$50</span>
+            <span>${bookedRoomInfo?.rooms * bookedRoomInfo?.price}</span>
           </div>
           <div className="flex justify-between font-bold border-t pt-2">
             <span>Total Amount</span>
-            <span>$1400</span>
+            <span>
+              $
+              {(bookedRoomInfo?.price + taxes + bookedRoomInfo?.fees).toFixed(
+                2
+              )}
+            </span>
           </div>
         </div>
         <button

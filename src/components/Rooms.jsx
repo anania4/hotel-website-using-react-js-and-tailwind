@@ -20,6 +20,11 @@ const Rooms = ({ query }) => {
   if (error) return <Error />;
 
   return (
+    <div>
+    <div className="bg-room bg-cover bg-center h-[560px] relative flex justify-center items-center">
+        <div className="absolute w-full h-full bg-black/70"></div>
+        <h1 className="text-6xl text-white z-20 font-primary">Our Rooms</h1>
+      </div>
     <section className="py-24">
       <div className="container mx-auto ">
         <div
@@ -32,6 +37,7 @@ const Rooms = ({ query }) => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

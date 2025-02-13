@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Listbox, Switch } from "@headlessui/react";
+import React, { useContext } from "react";
+import { Switch } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { BookingContext } from "../context/BookingContext";
@@ -48,9 +48,6 @@ export default function BookingDetails() {
 
   const navigate = useNavigate();
 
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState();
-
   // Mutations
   const mutation = useMutation({
     mutationFn: (roomData) =>
@@ -83,27 +80,6 @@ export default function BookingDetails() {
       toast.error("Please fill out all the fields");
       return;
     }
-    /*
-    console.log({
-      rooms,
-      total,
-      adults,
-      kids,
-      checkIn,
-      checkOut,
-      selectedTitle,
-      selectedCountry,
-      acceptedTerms,
-      titles,
-      countries,
-      firstName,
-      lastName,
-      email,
-      phone,
-      address,
-      city,
-    });
-    */
 
     mutation.mutate({
       rooms,
@@ -125,22 +101,20 @@ export default function BookingDetails() {
       city,
       room: selectedRoom,
     });
-  };
+    if (mutation.isSuccess) {
+      console.log(mutation.data);
+      const error = mutation.data.error;
+      if (error) toast.error(error[0]?.message);
+      else {
+        toast.success("Booking successful");
+        const bookingId = mutation.data.doc.id;
 
-  if (mutation.isSuccess) {
-    console.log(mutation.data);
-    const error = mutation.data.error;
-    if (error) toast.error(error[0]?.message);
-    else {
-      toast.success("Booking successful");
-      const bookingId = mutation.data.id;
-      navigate(`/BookingSummary/${bookingId}`);
+        console.log(mutation.data);
 
-      setTimeout(() => {
-        navigator;
-      }, 100);
+        navigate(`/BookingSummary/${bookingId}`);
+      }
     }
-  }
+  };
 
   // if (mutation.isPending) return <Loading />;
 
